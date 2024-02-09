@@ -1,0 +1,32 @@
+.error-btn {
+  background-color: #6366f1;
+  border-radius: 7px;
+  color: white;
+}
+.profile-img {
+  height: 40px;
+  border-radius: 100px;
+  margin-top: 20px;
+}
+.name {
+  color: #6366f1;
+  font-size: 14px;
+}
+.profile-card {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  height: 200px;
+  width: 300px;
+  padding-left: 20px;
+  padding-top: 10px;
+  background-size: cover;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bio-description {
+  font-size: 12px;
+}

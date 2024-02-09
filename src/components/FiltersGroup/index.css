@@ -1,0 +1,33 @@
+.salary-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.salary-label {
+  margin-left: 10px;
+}
+.salary-heading {
+  color: white;
+  font-size: 14px;
+}
+.employee-heading {
+  color: white;
+  font-size: 14px;
+}
+.salary-label {
+  color: white;
+}
+.employee-label {
+  color: white;
+}
+.filter-groups-container {
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .filter-groups-container {
+    width: 30%;
+    max-width: 300px;
+    min-width: 240px;
+    flex-shrink: 0;
+  }
+}
