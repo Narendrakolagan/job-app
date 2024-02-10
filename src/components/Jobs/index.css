@@ -47,3 +47,12 @@
   background-color: #6366f1;
   color: white;
 }
+.search-input-jobs-lists-container {
+  width: 70%;
+}
+.loading-container {
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

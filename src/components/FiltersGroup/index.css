@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 20px;
+}
+.employe-item {
+  margin-top: 20px;
 }
 .salary-label {
   margin-left: 10px;
@@ -22,6 +26,7 @@
 }
 .filter-groups-container {
   margin-top: 20px;
+  margin-left: 45px;
 }
 @media screen and (min-width: 768px) {
   .filter-groups-container {
@@ -30,4 +35,6 @@
     min-width: 240px;
     flex-shrink: 0;
   }
+}
+.salary-container {
 }

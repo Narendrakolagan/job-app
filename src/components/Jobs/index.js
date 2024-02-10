@@ -57,6 +57,9 @@ class Jobs extends Component {
   state = {
     jobsList: [],
     apiStatus: apiStatusConstants.initial,
+    employeeType: [],
+    minimumSalary: 0,
+    searchInput: '',
   }
 
   componentDidMount() {
@@ -64,8 +67,12 @@ class Jobs extends Component {
   }
 
   getJobs = async () => {
+    const {employeeType, minimumSalary, searchInput} = this.state
+    this.setState({
+      apiStatus: apiStatusConstants.inProgress,
+    })
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = 'https://apis.ccbp.in/jobs'
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${employeeType.join()}&minimum_package=${minimumSalary}search=${searchInput}`
     const options = {
       headers: {
         Authorization: `Bearer ${jwtToken}`,
@@ -132,6 +139,46 @@ class Jobs extends Component {
     )
   }
 
+  changeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  onEnterSearchInput = event => {
+    if (event.key === 'Enter') {
+      this.getJobs()
+    }
+  }
+
+  changeSalary = salary => {
+    this.setState(
+      {
+        minimumSalary: salary,
+      },
+      this.getJobs,
+    )
+  }
+
+  changeEmployeeList = type => {
+    this.setState(
+      prev => ({employeeType: [...prev.employeeType, type]}),
+      this.getJobs,
+    )
+  }
+
+  renderAllJobs = () => {
+    const {apiStatus} = this.state
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.renderJobsList()
+      case apiStatusConstants.failure:
+        return this.renderFailureView()
+      case apiStatusConstants.inProgress:
+        return this.renderLoadingView()
+      default:
+        return null
+    }
+  }
+
   render() {
     return (
       <>
@@ -141,6 +188,8 @@ class Jobs extends Component {
             <FiltersGroup
               employmentTypesList={employmentTypesList}
               salaryRangesList={salaryRangesList}
+              changeSalary={this.changeSalary}
+              changeEmployeeList={this.changeEmployeeList}
             />
             <div className="search-input-jobs-lists-container">
               <div className="search-input-container">
@@ -148,11 +197,18 @@ class Jobs extends Component {
                   type="text"
                   className="search-input"
                   placeholder="Search"
+                  onChange={this.changeSearchInput}
+                  onKeyDown={this.onEnterSearchInput}
                 />
-                <button type="button" className="search-button">
+                <button
+                  type="button"
+                  label="searchButton"
+                  className="search-button"
+                >
                   <BsSearch className="search-icon-desktop" />
                 </button>
               </div>
+              {this.renderAllJobs()}
             </div>
           </div>
         </div>
